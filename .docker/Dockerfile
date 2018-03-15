@@ -22,4 +22,4 @@ RUN chown -R logstash.logstash /tmp/logstash/
 RUN chmod 777 -R /tmp/logstash/
 
 #Instalação ded plugin logstash
-#RUN /usr/share/logstash/bin/logstash-plugin install logstash-output-jdbc
+RUN /usr/share/logstash/bin/logstash-plugin install logstash-output-jdbc

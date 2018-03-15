@@ -34,6 +34,10 @@
 
 ```
 
+### Plugins
+
+- logstash-output-jdbc
+
 
 ### Inicializar container
 
