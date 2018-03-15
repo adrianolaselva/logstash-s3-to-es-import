@@ -1,0 +1,13 @@
+http.host: 0.0.0.0
+path.config: /usr/share/logstash/pipeline
+path.data: /usr/share/logstash/queue
+path.logs: /usr/share/logstash/logs
+pipeline.batch.delay: 1000
+pipeline.batch.size: 10000
+pipeline.workers: 4
+queue.max_bytes: 4gb
+queue.type: persisted
+xpack.monitoring.elasticsearch.password: ""
+xpack.monitoring.elasticsearch.url: ""
+xpack.monitoring.elasticsearch.username: ""
+xpack.monitoring.enabled: false

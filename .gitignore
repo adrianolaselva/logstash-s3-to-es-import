@@ -1,0 +1,12 @@
+.idea
+.docker/data/*
+.docker/queue/*
+.docker/tmp/logstash/*
+.docker/logs/*
+!.docker/data/.gitkeep
+!.docker/queue/.gitkeep
+!.docker/tmp/logstash/.gitkeep
+!.docker/logs/.gitkeep
+.env
+pipeline/*
+!pipeline/.gitkeep

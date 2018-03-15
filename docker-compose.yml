@@ -1,0 +1,41 @@
+
+version: '3'
+
+services:
+  logstash:
+      container_name: logstash${INSTANCE_NAME}
+      build: ./.docker/
+      privileged: true
+      volumes:
+        - ${SERVIDOR_DIR}:/tmp/servidor/
+        - ./pipeline:/usr/share/logstash/pipeline/
+        - ./.docker/config:/usr/share/logstash/config/
+        - ./.docker/logs:/usr/share/logstash/logs/
+        - ./.docker/data:/usr/share/logstash/data/
+        - ./.docker/queue:/usr/share/logstash/queue/
+        - ./.docker/tmp/logstash:/tmp/logstash/
+      env_file:
+        - .env
+      environment:
+        INSTANCE_NAME: ${INSTANCE_NAME}
+        LS_DEBUG: ${LS_DEBUG}
+        LS_JAVA_OPTS: ${LS_JAVA_OPTS}
+        LS_HEAP_SIZE: ${LS_HEAP_SIZE}
+        ES_URL: ${ES_URL}
+        ES_USER: ${ES_USER}
+        ES_PWD: ${ES_PWD}
+        ES_INDEX: ${ES_INDEX}
+        ES_DOCUMENT_TYPE: ${ES_DOCUMENT_TYPE}
+        S3_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
+        S3_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+        S3_REGION: ${S3_REGION}
+        S3_PREFIX: ${S3_PREFIX}
+        S3_BUCKET: ${S3_BUCKET}
+        S3_TO_BUCKET: ${S3_TO_BUCKET}
+        SINCEDB_PATH: ${SINCEDB_PATH}
+        SERVIDOR_DIR: ${SERVIDOR_DIR}
+      deploy:
+        resources:
+          limits:
+            cpus: ${DEPLOY_RESOURCES_LIMITS_CPUS}
+            memory: ${DEPLOY_RESOURCES_LIMITS_MEMORY} 
