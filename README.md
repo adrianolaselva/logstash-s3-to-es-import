@@ -68,6 +68,19 @@ input
 
 filter 
 {
+    mutate {
+        add_field => {
+            "[@metadata][debug]" => "${LS_DEBUG:false}"
+        }
+        add_field => {
+            "[@metadata][indexDate]" => "%{+YYYYMMdd}"
+        }
+    }
+    ruby {
+        code => "require 'digest/md5';
+        event.set('[@metadata][computed_id]', Digest::MD5.hexdigest(event.get('[message]')))"
+    }
+
     csv {}
 }
 
