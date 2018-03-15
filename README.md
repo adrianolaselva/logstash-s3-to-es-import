@@ -54,7 +54,16 @@
 
 input 
 {
-    s3 {}
+      s3 {
+          bucket => "${S3_BUCKET}"
+          access_key_id  => "${S3_ACCESS_KEY_ID}"
+          secret_access_key => "${S3_SECRET_ACCESS_KEY}"
+          region => "${S3_REGION}"
+          prefix => "${S3_PREFIX}"
+          backup_to_bucket => "${S3_TO_BUCKET}"
+          delete => false
+          sincedb_path => "${SINCEDB_PATH}"
+      }
 }
 
 filter 
@@ -62,9 +71,21 @@ filter
     csv {}
 }
 
-output
-{
-    elasticsearch {}
+output {
+
+    if [@metadata][debug] == "true" {
+        stdout { codec => rubydebug }
+    } else {
+        elasticsearch {
+            action => "index"
+            hosts => "${ES_URL}"
+            index => "${ES_INDEX}%{[@metadata][indexDate]}"
+    	    user => "${ES_USER}"
+    	    document_type => "${ES_DOCUMENT_TYPE}"
+    	    password => "${ES_PWD}"
+    	    document_id => "%{[@metadata][computed_id]}"
+        }
+    }
 }
 
 ```
