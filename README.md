@@ -1,5 +1,5 @@
 
-# Importador de transações PayGo (Logstash)
+# Importador (Logstash)
 
 
 ### Variáveis de ambiente
